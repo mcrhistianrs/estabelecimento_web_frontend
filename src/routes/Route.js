@@ -7,18 +7,19 @@ export default function RouterWrapper({
     isPrivate=false,
     ...rest
 }){
-    const {signed} = store.getState().auth;
-    //console.tron.log(signed);
-    //const signed =  false;
-    console.tron.log(signed);
+    // console.log(store.getState().auth)
+    // const {signed} = store.getState().auth;
+    // //console.tron.log(signed);
+    // //const signed =  false;
+    
 
-    if(signed === false && isPrivate){
-        return <Redirect to="/" />
-    }
+    // if(signed === false && isPrivate){
+    //     return <Redirect to="/" />
+    // }
 
-    if(signed === true && !isPrivate){
-        return <Redirect to="/dashboard" />
-    }
+    // if(signed === true && !isPrivate){
+    //     return <Redirect to="/dashboard" />
+    // }
 
     return  <Route  {...rest} component={Component}/>;
     

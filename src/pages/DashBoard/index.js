@@ -6,7 +6,7 @@ import {signOut}          from '../../store/modules/auth/actions';
 import logo   from '../../assets/logo.png';
 import { FilePlus,List,LogOut}  from '@styled-icons/feather';
 
-
+import Listar from '../Listar'
 
 
 import { 
@@ -29,7 +29,7 @@ export default function DashBoard() {
     switch(botao){
 
       case 'Listar':
-        return <h1>Listar</h1>
+        return <Listar />
 
       default:
         return <h1>default</h1>

@@ -14,6 +14,7 @@ export function* signIn({payload}){
         const { token,user } = response.data;
         yield put(signInSuccess(token,user));
         history.push('/dashboard');            
+        
     } catch (error) {
         
     }
