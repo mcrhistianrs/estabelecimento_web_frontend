@@ -6,18 +6,11 @@ import {
     Header,
     Lista,
     Documento,
-    BotoesLista
 } from './styles';
-import {toast}   from 'react-toastify';
-import { css } from 'glamor';
-import {Square,CheckSquare,ZoomIn,ZoomOut,Maximize} from '@styled-icons/feather';
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 export default function Listar(){
-    const {id,token,perfil} = store.getState().auth;
+    const {token} = store.getState().auth;
     const [ estabelecimentos,setEstabelecimentos] = useState([]);
-    const [botao,setBotao] = useState('Entrega/Aberto');
-    const [checkbox,setCheckBox] = useState([]);
     const [pesquisa,setPesquisa] = useState([]);
 
     
@@ -31,69 +24,9 @@ export default function Listar(){
         setEstabelecimentos(response.data);
     }
 
-    function CheckBox(props){
-        
-        
-        const {marcado} = props;
-        let elemento = {};
-        checkbox.map((item,index) =>{
-            if(index===marcado){
-                elemento  = item;
-            }
-        });
-
-        switch(elemento.valor){
-            case 1:
-                return <CheckSquare size="40"  style={{color:'#15a84f',paddingRight:'1vw',fontWeight:"bold"}}/>
-
-            default:
-                return <Square size="40"  style={{color:'#15a84f',paddingRight:'1vw',fontWeight:"bold"}}/>
-        }
-       
-        
-
-        
-        
-    }
-
-    function handleMarcaTodos(){
-        const  checkbox_aux =  checkbox.map(item =>{
-            item.valor=1;
-            return item;
-        });
-        console.log(checkbox_aux);
-        setCheckBox(checkbox_aux);
-    }
-
-    function handleDesmarcaTodos(){
-        const  checkbox_aux =  checkbox.map(item =>{
-            item.valor=0;
-            return item;
-        });
-        setCheckBox(checkbox_aux);
-    }
-
-    function handleDespachar(){
-        checkbox.map( (item,index) =>{
-            if(item.valor===1){
-                api.put(`/documento/${item.id}` ,
-                   {
-                       motoboy:1
-                    },
-                   {
-                    headers: {Authorization: 'Bearer '+token
-                    }
-                });
-            }
-        });
-        toast.success('Despachado OK', {
-            className:  css({
-                background: "#86c739 !important"
-            }),
-        });
-
-    }
-    
+    useEffect(() =>{
+        handlePesquisa()
+    },[])
     
     return (
         <Container>
@@ -109,6 +42,7 @@ export default function Listar(){
                 {
                     estabelecimentos.map(e =>(
                         <Documento>
+                            <strong>{e.id}</strong>
                             <strong>{e.nome}</strong>
                             <p>{e.descricao}</p>
                         </Documento>

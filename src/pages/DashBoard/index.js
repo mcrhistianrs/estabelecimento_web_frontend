@@ -4,10 +4,12 @@ import {useDispatch}      from 'react-redux';
 import {signOut}          from '../../store/modules/auth/actions';
 
 import logo   from '../../assets/logo.png';
-import { FilePlus,List,LogOut}  from '@styled-icons/feather';
+import { FilePlus,FileMinus, Edit2, List,LogOut}  from '@styled-icons/feather';
 
 import Listar from '../Listar'
-
+import Adicionar from '../Adicionar';
+import Remover from '../Remover';
+import Editar from '../Editar';
 
 import { 
   MenuDashBoard,
@@ -16,6 +18,7 @@ import {
   Menus,
   Conteudo
  } from './styles';
+
 
 export default function DashBoard() {
   const [ botao , setBotao] = useState('Listar');
@@ -30,6 +33,15 @@ export default function DashBoard() {
 
       case 'Listar':
         return <Listar />
+
+      case 'Adicionar':
+        return <Adicionar />
+
+      case 'Remover':
+        return <Remover />
+
+      case 'Editar':
+        return <Editar />
 
       default:
         return <h1>default</h1>
@@ -54,11 +66,19 @@ export default function DashBoard() {
       </Header>
 
       <Menus>
-        <button >
+        <button onClick={() => setBotao('Adicionar')}>
           <FilePlus size="30" color="white" style={{margin:"1vh"}} />
         </button>
+
+        <button onClick={() => setBotao('Remover')}>
+          <FileMinus size="30" color="white" style={{margin:"1vh"}} />
+        </button>
+
+        <button onClick={() => setBotao('Editar')}>
+          <Edit2 size="30" color="white" style={{margin:"1vh"}} />
+        </button>
           
-        <button >
+        <button onClick={() => setBotao('Listar')}>
           <List size="30" color="white" style={{margin:"1vh"}} />
         </button>
         
